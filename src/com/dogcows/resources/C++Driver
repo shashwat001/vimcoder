@@ -142,6 +142,7 @@ bool __equals(const std::vector<double>& actual, const std::vector<double>& expe
 
 int main(int argc, char* argv[])
 {
+#ifdef TEST
 	bool	__abort_on_fail = false;
 	int	__pass = 0;
 	int	__fail = 0;
@@ -165,10 +166,14 @@ int main(int argc, char* argv[])
 		std::cout.flush();
 
 		__timer_start();
-
+#elif
+		$METHODPARAMDECLARES$
+		cin >> $METHODPARAMSTREAMIN$;
+#endif
 		$CLASSNAME$ __object;
 		$RETURNTYPE$ __actual = __object.$METHODNAME$($METHODPARAMNAMES$);
 
+#ifdef TEST
 		double __t = __timer_stop();
 
 		std::cout << "# test completed in " << __t << "ms" << std::endl;
@@ -202,6 +207,9 @@ int main(int argc, char* argv[])
 	}
 
 	return __fail;
+#elif
+	return 0;
+#endif
 }
 
 // vim:ft=cpp:noet:ts=8
